@@ -1,0 +1,94 @@
+---
+title: "DATA 605 HW5"
+author: "Yohannes Deboch"
+date: "March 2, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Choose independently two numbers B and C at random from the interval [0, 1] with
+uniform density. Prove that B and C are proper probability distributions.
+Note that the point (B,C) is then chosen at random in the unit square.
+```{r}
+# Set seed v alue
+set.seed(1)
+n <- 1000000
+# Generate two sereis of random variables B and C
+B <- runif(n,0,1)
+C <- runif(n,0,1)
+# See first few values
+head(B)
+head(C)
+```
+To prove proper probability distributions we've to show that all all the values are greater than 0 and the empirical cumulative values lies between 0 to 1.
+Here all the values of variable B and C are greater than 0.
+```{r}
+ecdf(B)
+ecdf(C)
+```
+From the empirical cumulitive distribution we can see that the value of cumulutive distrubiotn functions for both B and C lies between 0 to 1 that is the total probability is 1. 
+
+From the above discussion we can say that randomly choosen two random numbers B and C are proper probabilijty distributions.
+
+Find the probability that
+(a) B + C < 1/2.
+
+Answer: 
+
+We find the sum of the proabilities of each B + C < 0.5.
+
+```{r}
+sum(punif((B+C)<0.5, min=0, max=1)) / n
+```
+The probability that the the sum of B and C values falls below $\frac{1}{2}$ is 0.125325.
+(b) BC < 1/2.
+
+Answer: 
+
+We find the sum of the proabilities of each B * C < 0.5.
+
+```{r}
+sum(punif((B*C)<0.5, min=0, max=1)) / n
+```
+The probability that the the product of B and C values falls below $\frac{1}{2}$ is 0.846724.
+
+(c) |B − C| < 1/2.
+
+Answer: 
+
+We find the sum of the proabilities of each |B − C| < 1/2.
+```{r}
+sum(punif(abs(B-C)<0.5, min=0, max=1)) / n
+```
+The probability that the the absolute difference of B and C values falls below $\frac{1}{2}$ is  0.7502.
+
+(d) max{B,C} < 1/2.
+
+Answer: 
+We find the sum of the proabilities of each max{B,C} < 1/2.
+```{r}
+favor <- 0
+for(i in 1:length(B)){
+  if(max(B[i], C[i]) < 0.5){
+    favor <- favor + 1
+  }
+}
+favor/n
+```
+The probability that the maximum value of B and C falls below $\frac{1}{2}$ is  0.250287.
+
+(e) min{B,C} < 1/2.
+Answer: 
+We find the sum of the proabilities of each min{B,C} < 1/2.
+```{r}
+favor <- 0
+for(i in 1:length(B)){
+  if(min(B[i], C[i]) < 0.5){
+    favor <- favor + 1
+  }
+}
+favor/n
+```
+The probability that the minimum value of B and C falls below $\frac{1}{2}$ is  0.749991.

@@ -1,0 +1,81 @@
+---
+title: "Data 605 Discussion Week 5"
+author: "Yohannes Deboch"
+date: "March 3, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+1 Modify the program CoinTosses to toss a coin n times and print out after
+every 100 tosses the proportion of heads minus 1/2. Do these numbers appear
+to approach 0 as n increases? 
+```{r}
+# set.seed(1)
+CoinToss <- function(n){
+      headTotal <- 0
+    tailTotal <- 0
+for(i in 1:n){
+  
+    randomNumber <- runif(1,0,1)
+if(randomNumber<0.5){
+    outcome <- "H"
+    headTotal <- headTotal + 1
+}else{
+    outcome <-"T"
+    tailTotal <- tailTotal + 1
+}
+    # cat(outcome)
+    if(i%%100 == 0){
+        cat("Value of n: ",i," Proportions of heads:",(headTotal/i)-0.5,"\n")
+ 
+    }
+}
+   cat("\n")
+   print("Head ")
+   print(headTotal)
+   print("Tail ")
+   print(tailTotal)
+}
+CoinToss(10000)
+```
+As the value of n increases the numbers approaches to 0.
+
+ Modify the program again to print out, every
+100 times, both of the following quantities: the proportion of heads minus 1/2,
+and the number of heads minus half the number of tosses. Do these numbers
+appear to approach 0 as n increases?
+```{r}
+# set.seed(1)
+CoinToss <- function(n){
+      headTotal <- 0
+    tailTotal <- 0
+for(i in 1:n){
+  
+    randomNumber <- runif(1,0,1)
+if(randomNumber<0.5){
+    outcome <- "H"
+    headTotal <- headTotal + 1
+}else{
+    outcome <-"T"
+    tailTotal <- tailTotal + 1
+}
+    # cat(outcome)
+    if(i%%100 == 0){
+        cat("Value of n: ",i," the proportion of heads minus 1/2 ",(headTotal/i)-0.5,"\n")
+                cat(" the number of heads minus half the number of tosses",headTotal-i/2,"\n")
+
+ 
+    }
+}
+   cat("\n")
+   print("Head ")
+   print(headTotal)
+   print("Tail ")
+   print(tailTotal)
+}
+CoinToss(10000)
+```
+Yes.These numbers
+appears to approach 0 as n increases
